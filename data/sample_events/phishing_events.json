@@ -1,0 +1,30 @@
+[
+  {
+    "event_id": "evt_phish_001",
+    "event_type": "url_submission",
+    "timestamp": "2026-10-13T10:00:00Z",
+    "source_ip": "198.51.100.45",
+    "user_id": "victim_alice",
+    "target": "http://192.168.1.105/login/bank-verify.php",
+    "source_module": "email_gateway",
+    "evidence": {
+      "url": "http://192.168.1.105/login/bank-verify.php",
+      "sender": "alerts@banking-security-update.xyz",
+      "subject": "Urgent Account Verification Required"
+    }
+  },
+  {
+    "event_id": "evt_phish_002",
+    "event_type": "url_submission",
+    "timestamp": "2026-10-13T10:01:00Z",
+    "source_ip": "198.51.100.45",
+    "user_id": "victim_alice",
+    "target": "https://www.google.com/search?q=cybersecurity",
+    "source_module": "proxy_log",
+    "evidence": {
+      "url": "https://www.google.com/search?q=cybersecurity",
+      "sender": "internal",
+      "subject": "Benign Search Query"
+    }
+  }
+]

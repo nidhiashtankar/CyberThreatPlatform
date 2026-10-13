@@ -1,0 +1,62 @@
+[
+  {
+    "event_id": "evt_login_001",
+    "event_type": "login_attempt",
+    "timestamp": "2026-10-13T10:05:01Z",
+    "source_ip": "198.51.100.45",
+    "user_id": "admin_svc",
+    "target": "portal.corp.internal",
+    "source_module": "auth_sensor",
+    "evidence": {"status": "failed", "attempt": 1}
+  },
+  {
+    "event_id": "evt_login_002",
+    "event_type": "login_attempt",
+    "timestamp": "2026-10-13T10:05:10Z",
+    "source_ip": "198.51.100.45",
+    "user_id": "admin_svc",
+    "target": "portal.corp.internal",
+    "source_module": "auth_sensor",
+    "evidence": {"status": "failed", "attempt": 2}
+  },
+  {
+    "event_id": "evt_login_003",
+    "event_type": "login_attempt",
+    "timestamp": "2026-10-13T10:05:20Z",
+    "source_ip": "198.51.100.45",
+    "user_id": "admin_svc",
+    "target": "portal.corp.internal",
+    "source_module": "auth_sensor",
+    "evidence": {"status": "failed", "attempt": 3}
+  },
+  {
+    "event_id": "evt_login_004",
+    "event_type": "login_attempt",
+    "timestamp": "2026-10-13T10:05:30Z",
+    "source_ip": "198.51.100.45",
+    "user_id": "admin_svc",
+    "target": "portal.corp.internal",
+    "source_module": "auth_sensor",
+    "evidence": {"status": "failed", "attempt": 4}
+  },
+  {
+    "event_id": "evt_login_005",
+    "event_type": "login_attempt",
+    "timestamp": "2026-10-13T10:05:40Z",
+    "source_ip": "198.51.100.45",
+    "user_id": "admin_svc",
+    "target": "portal.corp.internal",
+    "source_module": "auth_sensor",
+    "evidence": {"status": "failed", "attempt": 5}
+  },
+  {
+    "event_id": "evt_login_006",
+    "event_type": "login_attempt",
+    "timestamp": "2026-10-13T10:05:50Z",
+    "source_ip": "198.51.100.45",
+    "user_id": "admin_svc",
+    "target": "portal.corp.internal",
+    "source_module": "auth_sensor",
+    "evidence": {"status": "success", "attempt": 6, "note": "Suspicious successful login following failures"}
+  }
+]

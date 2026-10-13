@@ -1,0 +1,44 @@
+[
+  {
+    "event_id": "ip_rot_01_initial_probe",
+    "event_type": "http_request",
+    "timestamp": "2026-10-13T11:00:00Z",
+    "source_ip": "198.51.100.45",
+    "user_id": "operator_bob",
+    "target": "/login",
+    "source_module": "web_waf",
+    "evidence": {
+      "method": "POST",
+      "uri": "/login",
+      "body": "user=operator_bob&query=' OR '1'='1'--"
+    }
+  },
+  {
+    "event_id": "ip_rot_02_honey_touch",
+    "event_type": "honeytoken_access",
+    "timestamp": "2026-10-13T11:05:00Z",
+    "source_ip": "198.51.100.45",
+    "user_id": "operator_bob",
+    "target": "aws_canary_role",
+    "source_module": "deception_sensor",
+    "evidence": {
+      "token": "HONEYTOKEN_AWS_DEV_KEY_9921",
+      "decoy_type": "AWS Canary Key"
+    }
+  },
+  {
+    "event_id": "ip_rot_03_ip_changed_login",
+    "event_type": "login_attempt",
+    "timestamp": "2026-10-13T11:10:00Z",
+    "source_ip": "203.0.113.88",
+    "user_id": "operator_bob",
+    "target": "aws_canary_role",
+    "source_module": "auth_sensor",
+    "evidence": {
+      "status": "failed",
+      "attempt": 1,
+      "token_ref": "HONEYTOKEN_AWS_DEV_KEY_9921",
+      "note": "Attacker rotated source IP from 198.51.100.45 to 203.0.113.88 while targeting same user and honeytoken"
+    }
+  }
+]

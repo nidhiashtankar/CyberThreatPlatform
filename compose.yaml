@@ -1,1 +1,56 @@
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: cyber-threat-db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: cyber_threat_platform
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d cyber_threat_platform"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
 
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: cyber-threat-backend
+    restart: always
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/cyber_threat_platform
+      - ENVIRONMENT=production
+      - SECRET_KEY=academic-prototype-cyber-threat-secret-2026
+      - LOGIN_FAILED_THRESHOLD=5
+      - LOGIN_WINDOW_SECONDS=120
+      - PORT_SCAN_PORT_THRESHOLD=10
+      - PORT_SCAN_WINDOW_SECONDS=60
+      - CORRELATION_WINDOW_SECONDS=1800
+      - RISK_DECAY_HALF_LIFE_HOURS=24
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: cyber-threat-frontend
+    restart: always
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
+volumes:
+  pgdata:
+    driver: local

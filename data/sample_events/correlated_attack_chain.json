@@ -1,0 +1,79 @@
+[
+  {
+    "event_id": "chain_01_scan",
+    "event_type": "network_connection",
+    "timestamp": "2026-10-13T10:30:00Z",
+    "source_ip": "198.51.100.45",
+    "target": "web-db.corp.local",
+    "source_module": "netflow",
+    "evidence": {"destination_ip": "10.0.0.50", "destination_port": 22, "protocol": "TCP"}
+  },
+  {
+    "event_id": "chain_02_web",
+    "event_type": "http_request",
+    "timestamp": "2026-10-13T10:31:00Z",
+    "source_ip": "198.51.100.45",
+    "user_id": "admin_svc",
+    "target": "/api/v1/auth",
+    "source_module": "waf",
+    "evidence": {
+      "method": "POST",
+      "uri": "/api/v1/auth",
+      "body": "username=admin_svc' OR '1'='1'--&password=x",
+      "status_code": 401
+    }
+  },
+  {
+    "event_id": "chain_03_login_f1",
+    "event_type": "login_attempt",
+    "timestamp": "2026-10-13T10:32:00Z",
+    "source_ip": "198.51.100.45",
+    "user_id": "admin_svc",
+    "target": "web-db.corp.local",
+    "source_module": "auth_sensor",
+    "evidence": {"status": "failed", "attempt": 1}
+  },
+  {
+    "event_id": "chain_04_login_f2",
+    "event_type": "login_attempt",
+    "timestamp": "2026-10-13T10:32:10Z",
+    "source_ip": "198.51.100.45",
+    "user_id": "admin_svc",
+    "target": "web-db.corp.local",
+    "source_module": "auth_sensor",
+    "evidence": {"status": "failed", "attempt": 2}
+  },
+  {
+    "event_id": "chain_05_login_f3",
+    "event_type": "login_attempt",
+    "timestamp": "2026-10-13T10:32:20Z",
+    "source_ip": "198.51.100.45",
+    "user_id": "admin_svc",
+    "target": "web-db.corp.local",
+    "source_module": "auth_sensor",
+    "evidence": {"status": "failed", "attempt": 3}
+  },
+  {
+    "event_id": "chain_06_login_succ",
+    "event_type": "login_attempt",
+    "timestamp": "2026-10-13T10:32:30Z",
+    "source_ip": "198.51.100.45",
+    "user_id": "admin_svc",
+    "target": "web-db.corp.local",
+    "source_module": "auth_sensor",
+    "evidence": {"status": "success", "attempt": 4}
+  },
+  {
+    "event_id": "chain_07_honey",
+    "event_type": "honeytoken_access",
+    "timestamp": "2026-10-13T10:33:00Z",
+    "source_ip": "198.51.100.45",
+    "user_id": "admin_svc",
+    "target": "cloud-storage-vault",
+    "source_module": "deception_grid",
+    "evidence": {
+      "token": "HONEYTOKEN_AWS_DEV_KEY_9921",
+      "decoy_type": "Canary IAM Secret"
+    }
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "event_id": "evt_honey_001",
+    "event_type": "honeytoken_access",
+    "timestamp": "2026-10-13T10:20:00Z",
+    "source_ip": "198.51.100.45",
+    "user_id": "compromised_service_account",
+    "target": "canary_iam_role_prod",
+    "source_module": "canary_monitor",
+    "evidence": {
+      "token": "HONEYTOKEN_AWS_DEV_KEY_9921",
+      "decoy_type": "Seeded AWS Access Key",
+      "action_attempted": "s3:ListAllMyBuckets"
+    }
+  },
+  {
+    "event_id": "evt_honey_002",
+    "event_type": "api_call",
+    "timestamp": "2026-10-13T10:21:00Z",
+    "source_ip": "203.0.113.88",
+    "user_id": "unknown_actor",
+    "target": "/admin/canary-gateway",
+    "source_module": "api_gateway",
+    "evidence": {
+      "headers": {"Authorization": "Bearer decoy_admin_token_alpha"},
+      "endpoint": "/admin/canary-gateway"
+    }
+  }
+]
